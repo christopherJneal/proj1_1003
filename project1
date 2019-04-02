@@ -1,6 +1,12 @@
-#include<stdio.h>
+#include <stdio.h>
 
-int main{
+int main()
+{
+    char hello[] = "hello world iayscvkuy";
+    printf("%s\n", hello);
+    printf("%c\n", hello[6]);
+    scanf("%s", hello);
+    printf("%s\n", hello);
 
-  return 0;
+    return 0;
 }

@@ -1,12 +1,16 @@
 #include <stdio.h>
 
+
 int main()
 {
-    char hello[] = "hello world iayscvkuy";
-    printf("%s\n", hello);
-    printf("%c\n", hello[6]);
-    scanf("%s", hello);
-    printf("%s\n", hello);
+    char message[128];
+    int key = 4, index = 0;
+    printf("Enter message to encoded: ");
+    scanf("%c\n", &message);
+    printf("%s\n", message);
+    
+    
+    
 
     return 0;
 }

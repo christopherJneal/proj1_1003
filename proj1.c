@@ -1,68 +1,36 @@
 #include <stdio.h>
+#define strln 128
 
-int main(void){
-    int frstChc, scndChc1, scndChc2;
-    printf("Hello welcome to the cipher.\n");
-    printf("Select from following menu.\n");
-    printf("----------------------\n");
-    printf("|(1) For encryption. |\n");
-    printf("|(2) For decryption. |\n");
-    printf("----------------------\n");
-    scanf("%d", &frstChc);
-    switch(frstChc){
-        case 1: frstChc == 1;
-            printf("Encryption was selected.\n");
-            printf("Select from following two encryption ciphers:\n");
-            printf("--------------------------\n");
-            printf("|(1) Rotation cipher.    |\n");
-            printf("|(2) Subsitution cipher. |\n");
-            printf("--------------------------\n");
-            scanf("%d", &scndChc);
-            switch(scndChc1){
-                case 1: scndChc1 == 1;
-                    printf("Encryption using the rotation cipher was selected\n");
-                    /*
-                     * do some stuff to open and use rotation cipher and print to different file.
-                     */
-                    return 0;
-                case 2: scndChc1 == 2;
-                    printf("Encryption using the substitution cipher was selected\n");
-                    /*
-                     * do some stuff to open and use substitution cipher and print to different file
-                     */
-                    return 0;
-                default:
-                    printf("Input caused an error, select from given options!\nTry again.\n");
-                    return 0;
+int main()
+{
+    char message[strln], x;    //array of data type=char, name=message,size=128 bytes
+    int key = 4, index;
+    printf( "Enter message to decrypt: " ); //message to be encrypted
+    scanf(" %[^\n]s", message );               //stores message in array
+                                            //data encryption key
+                                            //stores integer in adress assigned for key (pointer?)
+    
+    //for loop runs till message has been totally encrypted == till reaches NULL point
+    for( index = 0; index != strln; index++ ){
+        x = message[index];             //assigs each index number a datype from array message[]
+        if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
+            x = x - key;
+            if( x < 'a' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+                x = x + 'z' - 'a' + 1;  //minuses 26 from encrypted number, should exclude from encryption?
             }
-        case 2: frstChc == 2;
-            printf("Decryption was selected.\n");
-            printf("Select from following two decryption ciphers:\n");
-            printf("--------------------------\n");
-            printf("|(1) Rotation cipher.    |\n");
-            printf("|(2) Subsitution cipher. |\n");
-            printf("--------------------------\n");
-            scanf("%d", scndChc2);
-            switch(scndChc2){
-                case 1: scndChc2 == 1;
-                    printf("Decryption using the rotation cipher was selected\n");
-                    /*
-                     * do some stuff to open and use rotation cipher and print to different file.
-                     */
-                    return 0;
-                case 2: scndChc2 == 2;
-                    printf("Decryption using the substitution cipher was selected\n");
-                    /*
-                     * do some stuff to open and use substitution cipher and print to different file
-                     */
-                    return 0;
-                default:
-                    printf("Input caused an error, select from given options!\nTry again.\n");
-                    return 0;
+            message[index] = x;
+        }
+        else if( x >= 'A' && x <= 'Z' ){     //if contidion is between ASCII number 'a'-'z' || 65-90
+            x = x - key;
+            if( x < 'A' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+                x = x + 'Z' - 'A' + 1;
             }
-            
-        default:
-            printf("Input caused an error, select from given options!\nTry again.\n");
-
+            message[index] = x;
+        }
+        else if( x = '\0'){
+            break;
+        }
     }
+    printf("%s\n", message);
+    return 0; 
 }

@@ -15,14 +15,14 @@ int main()
         x = message[index];             //assigs each index number a datype from array message[]
         if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
             x = x - key;
-            if( x > 'z' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+            if( x < 'a' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
                 x = x + 'z' - 'a' + 1;  //minuses 26 from encrypted number, should exclude from encryption?
             }
             message[index] = x;
         }
         else if( x >= 'A' && x <= 'Z' ){     //if contidion is between ASCII number 'a'-'z' || 65-90
             x = x - key;
-            if( x > 'Z' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+            if( x < 'A' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
                 x = x + 'Z' - 'A' + 1;
             }
             message[index] = x;

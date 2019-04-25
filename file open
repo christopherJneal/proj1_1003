@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main(void){
+    FILE *input;
+    input = fopen("mes_encrpt", "r");       //opens file and reads the file.
+    while(feof(input) == 0){                //reads file till it reaches a null point which retruns a non zero integer and causes the program to print up until that.
+    char characterRead;
+    fscanf(input, "%c", &characterRead);    //every character read is stored to the variable name characterRaed
+    printf("%c", characterRead);
+    }
+    
+}

@@ -1,36 +1,50 @@
 #include <stdio.h>
-#define strln 128
+#include <string.h>
+#include <ctype.h>
 
-int main()
-{
-    char message[strln], x;    //array of data type=char, name=message,size=128 bytes
-    int key = 4, index;
-    printf( "Enter message to decrypt: " ); //message to be encrypted
-    scanf(" %[^\n]s", message );               //stores message in array
-                                            //data encryption key
-                                            //stores integer in adress assigned for key (pointer?)
-    
-    //for loop runs till message has been totally encrypted == till reaches NULL point
-    for( index = 0; index != strln; index++ ){
-        x = message[index];             //assigs each index number a datype from array message[]
-        if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
-            x = x - key;
-            if( x < 'a' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
-                x = x + 'z' - 'a' + 1;  //minuses 26 from encrypted number, should exclude from encryption?
-            }
-            message[index] = x;
-        }
-        else if( x >= 'A' && x <= 'Z' ){     //if contidion is between ASCII number 'a'-'z' || 65-90
-            x = x - key;
-            if( x < 'A' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
-                x = x + 'Z' - 'A' + 1;
-            }
-            message[index] = x;
-        }
-        else if( x = '\0'){
-            break;
-        }
+void encrypt(char inchar){
+    //Changing chars
+    inchar = inchar + 6; //This is a simple substution
+    //print encrypted char
+    printf("%c",inchar);
+}
+
+
+int main(int argc, char* argv[]){
+    FILE *inputFile;
+    char messInpt[80];
+    char *inputPtr = messInpt;
+    char inchar;
+    int i;
+
+    inputFile = fopen("code.txt", "r");
+
+    //check file
+    if (inputFile == '\0'){ 
+        printf("Failed to open\n");
+        return 0;
     }
-    printf("%s\n", message);
-    return 0; 
+    else{
+        //inputFile is valid so I read a string
+        //and store it in inputBuffer
+        fgets(messInpt, 80, inputFile);
+
+        //pass every character of inputBuffer to encrypt()
+        for(i=0; i < strlen(messInpt); i++){
+            //printf("%c", inputBuffer[i]);
+            inchar = messInpt[i];
+            if( isalpha(inchar) && islower(inchar) ){
+                encrypt(messInpt[i]);
+            }
+            else if( isalpha(inchar) && isupper(inchar) ){
+                encrypt(messInpt[i]);
+            }
+            else{
+                void;
+            }
+        }
+
+    }
+    //printf("\n\n");
+    return 0;
 }

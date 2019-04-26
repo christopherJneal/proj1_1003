@@ -12,12 +12,12 @@ void encrypt(char inchar){
 
 int main(int argc, char* argv[]){
     FILE *inputFile;
-    char messInpt[80];
-    char *inputPtr = messInpt;
+    char mes_Inpt[80];
+    char *inputPtr = mes_Inpt;
     char inchar;
     int i;
 
-    inputFile = fopen("code.txt", "r");
+    inputFile = fopen("mes_encrpt", "r");
 
     //check file
     if (inputFile == '\0'){ 
@@ -27,17 +27,17 @@ int main(int argc, char* argv[]){
     else{
         //inputFile is valid so I read a string
         //and store it in inputBuffer
-        fgets(messInpt, 80, inputFile);
+        fgets(mes_Inpt, 80, inputFile);
 
         //pass every character of inputBuffer to encrypt()
-        for(i=0; i < strlen(messInpt); i++){
+        for(i=0; i < strlen(mes_Inpt); i++){
             //printf("%c", inputBuffer[i]);
-            inchar = messInpt[i];
+            inchar = mes_Inpt[i];
             if( isalpha(inchar) && islower(inchar) ){
-                encrypt(messInpt[i]);
+                encrypt(mes_Inpt[i]);
             }
             else if( isalpha(inchar) && isupper(inchar) ){
-                encrypt(messInpt[i]);
+                encrypt(mes_Inpt[i]);
             }
             else{
                 void;

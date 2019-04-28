@@ -7,15 +7,17 @@ char alpha[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm
 char key[26];
 
 void main(){
-    int i, key, choice, flag = 0;
+    int choice, flag = 0;
     char *cipher_text, message[255];
     printf("ENter plain text\n");
     scanf("%[^\n]", message);
-    decryption(cipher_text);
     printf("Your plain text message is: %s\n", message);
-    printf("Press 1 for encryption\n Press 2 for decryption\n Press 'o' for exit\n");
-    scanf("%d", &choice);
+    
+    //decryption(cipher_text);
+    
     do{
+        printf("\nPress 1 for encryption \nPress 2 for decryption \nPress 'o' for exit\n");
+        scanf("%d", &choice);
         switch( choice ){
             case 1: 
                 cipher_text = encryption(message);
@@ -35,11 +37,10 @@ void main(){
                 printf("Please enetr valif choice\n");
                 break;
             }
-    }while( choice != 0 )
-    return 0;
+    }while( choice != 0 );
 }
     char *encryption(char cipher_text[]){
-        int i, value, j;
+        int i, j;
         printf("Enter the unique key of 26 characters for encryption:\n");
         scanf("%s", key);
         printf("Character replaced\n");
@@ -58,7 +59,7 @@ void main(){
     return cipher_text;
     }
     void *decryption(char cipher_text[]){
-        int i, value, j;
+        int i, j;
         char cipher[255];
         strcpy(cipher, cipher_text);
         printf("Decryption Process\n");
@@ -70,6 +71,6 @@ void main(){
                 }
             }
         }
-    printf("Decrypted Text %s", cipher_text);
+    printf("Decrypted Text %s\n", cipher);
     return 0;
     }

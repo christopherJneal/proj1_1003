@@ -4,19 +4,21 @@
 int main()
 {
     char message[strln], x;    //array of data type=char, name=message,size=128 bytes
-    int key = 4, index;
-    printf( "Enter message to decrypt: " ); //message to be encrypted
-    scanf(" %[^\n]s", message );               //stores message in array
-                                            //data encryption key
-                                            //stores integer in adress assigned for key (pointer?)
+    int key, index;
+    printf("Enter message to decrypt: "); //message to be decrypted
+    scanf("%[^\n]s", message);               //stores message in array
+    printf("Eneter key value: ");
+    scanf("%d", &key);
+                                            //data decryption key
+                                            //stores integer in adress assigned for key 
     
-    //for loop runs till message has been totally encrypted == till reaches NULL point
+    //for loop runs till message has been totally decrypted == till reaches NULL point
     for( index = 0; index != strln; index++ ){
         x = message[index];             //assigs each index number a datype from array message[]
         if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
             x = x - key;
             if( x < 'a' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
-                x = x + 'z' - 'a' + 1;  //minuses 26 from encrypted number, should exclude from encryption?
+                x = x + 'z' - 'a' + 1;  //adds 26 from encrypted number, should exclude from encryption
             }
             message[index] = x;
         }
@@ -31,6 +33,6 @@ int main()
             break;
         }
     }
-    printf("%s\n", message);
+    printf("%s\n", message); //prints decrypted messae
     return 0; 
 }

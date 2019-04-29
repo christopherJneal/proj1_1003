@@ -12,7 +12,7 @@ void main(){
      */
     int choice, flag = 0, x, select_1, select_2;
     char *cipher_text, message[255];
-    int key_rot = 4, index;
+    int key_rot /*= 4*/, index;
     printf("Enter plain text: ");
     scanf("%[^\n]", message);
     printf("Your plain text message is: %s\n", message); //prints the input from user
@@ -35,62 +35,66 @@ void main(){
                 scanf("%d", &select_2);
                 
                 switch( select_2 ){
-                case 1:
-                //for loop runs till message has been totally encrypted == till reaches NULL point
-                for( index = 0; index != 255; index++ ){
-                    x = message[index];             //assigs each index number a datype from array message[]
-                    if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
-                        x = x + key_rot;
-                        if( x > 'z' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
-                            x = x - 'z' + 'a' - 1;  //subtracts 26 from encrypted number, should exclude from encryption
+                    case 1:
+                        printf("Enter value for key: ");
+                        scanf("%d", &key_rot);
+                        //for loop runs till message has been totally encrypted == till reaches NULL point
+                        for( index = 0; index != 255; index++ ){
+                            x = message[index];             //assigs each index number a datype from array message[]
+                            if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
+                                x = x + key_rot;
+                                if( x > 'z' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+                                    x = x - 'z' + 'a' - 1;  //subtracts 26 from encrypted number, should exclude from encryption
+                                }
+                                message[index] = x;
+                            }
+                            else if( x >= 'A' && x <= 'Z' ){     //if contidion is between ASCII number 'a'-'z' || 65-90
+                                x = x + key_rot;
+                                if( x > 'Z' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+                                    x = x -'Z' + 'A' - 1;
+                                }
+                                message[index] = x;
+                            }
+                            else if( x = '\0'){
+                                break;
+                            }
                         }
-                        message[index] = x;
-                    }
-                    else if( x >= 'A' && x <= 'Z' ){     //if contidion is between ASCII number 'a'-'z' || 65-90
-                        x = x + key_rot;
-                        if( x > 'Z' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
-                            x = x -'Z' + 'A' - 1;
-                        }
-                        message[index] = x;
-                    }
-                    else if( x = '\0'){
+                        printf("%s\n", message); //prints encrypted message
                         break;
-                    }
-                }
-                printf("%s\n", message); //prints encrypted message
-                break;
-                
-                case 2:
-                //for loop runs till message has been totally decrypted == till reaches NULL point
-                for( index = 0; index != 255; index++ ){
-                    x = message[index];             //assigs each index number a datype from array message[]
-                    if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
-                        x = x - key_rot;
-                        if( x < 'a' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
-                            x = x + 'z' - 'a' + 1;  //adds 26 from encrypted number, should exclude from encryption
+                    
+                    case 2:
+                        printf("Enter value for key: ");
+                        scanf("%d", &key_rot);
+                        //for loop runs till message has been totally decrypted == till reaches NULL point
+                        for( index = 0; index != 255; index++ ){
+                            x = message[index];             //assigs each index number a datype from array message[]
+                            if( x >= 'a' && x <= 'z' ){     //if contidion is between ASCII number 'a'-'z' || 97-122  
+                                x = x - key_rot;
+                                if( x < 'a' ){              //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+                                    x = x + 'z' - 'a' + 1;  //adds 26 from encrypted number, should exclude from encryption
+                                }
+                                message[index] = x;
+                            }
+                            else if( x >= 'A' && x <= 'Z' ){     //if contidion is between ASCII number 'a'-'z' || 65-90
+                                x = x - key_rot;
+                                if( x < 'A' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
+                                    x = x + 'Z' - 'A' + 1;
+                                }
+                                message[index] = x;
+                            }
+                            else if( x = '\0'){
+                                break;
+                            }
                         }
-                        message[index] = x;
-                    }
-                    else if( x >= 'A' && x <= 'Z' ){     //if contidion is between ASCII number 'a'-'z' || 65-90
-                        x = x - key_rot;
-                        if( x < 'A' ){                   //if the encrypted ASCII number lies outside boundary conditions 'a'-'z'
-                            x = x + 'Z' - 'A' + 1;
-                        }
-                        message[index] = x;
-                    }
-                    else if( x = '\0'){
+                        printf("%s\n", message); //prints decrypted message
                         break;
-                    }
-                }
-                printf("%s\n", message); //prints decrypted message
-                break;
-                
-                case 0:
-                    break;
-                
-                default:
-                    printf("Input caused an error, select from given options!\nTry again.\n");
-                    return 0;
+                        
+                    case 0:
+                        break;
+                    
+                    default:
+                        printf("Input caused an error, select from given options!\nTry again.\n");
+                        return 0;
                 }
             }while( select_2 != 0 );
         }
@@ -98,35 +102,36 @@ void main(){
 
 
             else if( select_1 == 2 ){
-            do{
-                printf("Select from following menu.\n");
-                printf("----------------------\n");
-                printf("|(1) For encryption. |\n");
-                printf("|(2) For decryption. |\n");
-                printf("|(0) To exit program.|\n");
-                printf("----------------------\n");
-                scanf("%d", &choice);
-                switch( choice ){
-                    case 1: 
-                        cipher_text = encryption(message); //executes the encryption function defined under this code block
-                        flag = 1;
-                        break;
-                    case 2: 
-                        if( flag == 1 ){
-                            decryption(cipher_text); //executes the decryption function defined under this code block
-                        }
-                        else{
-                            printf("First perform encryption process\n");
+                do{
+                    printf("Select from following menu.\n");
+                    printf("----------------------\n");
+                    printf("|(1) For encryption. |\n");
+                    printf("|(2) For decryption. |\n");
+                    printf("|(0) To exit program.|\n");
+                    printf("----------------------\n");
+                    scanf("%d", &choice);
+                    switch( choice ){
+                        case 1: 
+                            cipher_text = encryption(message); //executes the encryption function defined under this code block
+                            flag = 1;
+                            break;
+                        case 2: 
+                            if( flag == 1 ){
+                                decryption(cipher_text); //executes the decryption function defined under this code block
+                            }
+                            else{
+                                printf("First perform encryption process\n");
+                                break;
+                            }
+                        case 0: 
+                            break;
+                        default:
+                            printf("Please enetr valid choice\n");
                             break;
                         }
-                    case 0: 
-                        break;
-                    default:
-                        printf("Please enetr valid choice\n");
-                        break;
-                    }
-            }while( choice != 0 );
+                }while( choice != 0 );
             }
+            
             else{
                 printf("Input caused an error, select from given options!\nTry again.\n");
                 return 0;
